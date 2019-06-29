@@ -1,8 +1,10 @@
 package main
 
 import (
+	"bufio"
 	"crypto/tls"
 	"fmt"
+	"os"
 	"strings"
 	"sync"
 
@@ -49,7 +51,12 @@ func main() {
 		return
 	}
 	IRC = irccon
-	wg.Add(2)
+	wg.Add(3)
+	go startServer()
+	buf := bufio.NewReader(os.Stdin)
+	fmt.Println("Proceed when out server online")
+	_, _ = buf.ReadBytes("\n")
+	go startClient()
 	go irccon.Loop()
 	wg.Wait()
 }
