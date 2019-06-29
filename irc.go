@@ -1,12 +1,11 @@
 package main
 
 import (
-	"bufio"
 	"crypto/tls"
 	"fmt"
-	"os"
 	"strings"
 	"sync"
+	"time"
 
 	irc "github.com/thoj/go-ircevent"
 )
@@ -53,9 +52,8 @@ func main() {
 	IRC = irccon
 	wg.Add(3)
 	go startServer()
-	buf := bufio.NewReader(os.Stdin)
 	fmt.Println("Proceed when out server online")
-	_, _ = buf.ReadBytes("\n")
+	time.Sleep(15)
 	go startClient()
 	go irccon.Loop()
 	wg.Wait()
