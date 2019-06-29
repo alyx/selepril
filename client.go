@@ -25,17 +25,9 @@ func startClient() {
 		}
 		os.Exit(1)
 	}
+	CConn = conn
 
 	for {
-		reader := bufio.NewReader(os.Stdin)
-		fmt.Print("> ")
-		text, _ := reader.ReadString('\n')
-
-		conn.SetWriteDeadline(time.Now().Add(1 * time.Second))
-		_, err := conn.Write([]byte(text))
-		if err != nil {
-			fmt.Println("Error writing to stream.")
-			break
 		}
 	}
 }
