@@ -21,6 +21,7 @@ func handlePrivmsg(e *irc.Event) {
 		msg := strings.Replace(rawmsg, "^add", "", 1)
 		msg = strings.Replace(msg, "\"", "'", 5000)
 		msg = strings.TrimSpace(msg)
+		CConn.SetWriteDeadline(time.Now().Add(1 * time.Second))
 		CConn.Write([]byte("DO ADD^Quotes(" + msg + ")\n"))
 		IRC.Privmsg(e.Source, "Quote added")
 	}
