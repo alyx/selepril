@@ -28,6 +28,5 @@ func startClient() {
 	CConn = conn
 
 	for {
-		}
 	}
 }
